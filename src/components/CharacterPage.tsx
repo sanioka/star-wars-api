@@ -18,7 +18,7 @@ const CharacterPage = () => {
     <div className='CharacterPage'>
       <Link to="/">{'< Back'}</Link>
       <pre>
-        {JSON.stringify(character, null, 2)}
+        {character ? JSON.stringify(character, null, 2) : 'Loading...'}
       </pre>
     </div>
   );
