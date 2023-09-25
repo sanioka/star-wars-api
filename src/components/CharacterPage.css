@@ -1,0 +1,4 @@
+.CharacterPage {
+  display: flex;
+  flex-direction: column;
+}

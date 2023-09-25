@@ -1,0 +1,12 @@
+.CharacterList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.CharacterList-Item {
+  /*padding: 5px;*/
+  /*border: 1px solid #282c34;*/
+  /*margin: 5px 0 5px 0;*/
+  /*width: 50%;*/
+}
