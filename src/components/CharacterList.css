@@ -10,3 +10,7 @@
   /*margin: 5px 0 5px 0;*/
   /*width: 50%;*/
 }
+
+.CharacterList-pagination {
+  display: flex;
+}
