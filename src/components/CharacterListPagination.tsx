@@ -10,7 +10,7 @@ const CharacterListPagination: FC<Props> = ({maxPageCount, currentPage, updateCu
         if (currentPage === index) {
           return <div key={`div${index}`}>{index}</div>
         } else {
-          // TODO: Memoize it
+          // TODO: Memoize onClick
           return <button key={`button${index}`} onClick={() => updateCurrentPage(index)}>{index}</button>
         }
       })

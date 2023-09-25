@@ -4,6 +4,7 @@ import "./CharacterList.css"
 import { Link } from "react-router-dom";
 import { IPeople } from "./IStarWars";
 import CharacterListPagination from "./CharacterListPagination";
+import { API_BASE_URl } from "../config";
 
 type ApiResponse = {
   count: number;
@@ -24,7 +25,7 @@ const CharacterList = () => {
   )
 
   useEffect(() => {
-    axios.get(`https://swapi.dev/api/people/?page=${currentPage}`)
+    axios.get(`${API_BASE_URl}/people/?page=${currentPage}`)
       .then((response: AxiosResponse<ApiResponse>) => {
         setCharacters(response.data.results)
         if (!maxPageCount) setMaxPageCount(Math.ceil(response.data.count / response.data.results.length))

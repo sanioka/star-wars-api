@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios, { AxiosResponse } from "axios";
 import { IPeople } from "./IStarWars";
+import { API_BASE_URl } from "../config";
 
 const CharacterPage = () => {
   // @ts-ignore
@@ -9,7 +10,7 @@ const CharacterPage = () => {
   const [character, setCharacter] = useState<IPeople | null>(null);
 
   useEffect(() => {
-    axios.get(`https://swapi.dev/api/people/${id}`)
+    axios.get(`${API_BASE_URl}/people/${id}`)
       .then((response: AxiosResponse<IPeople>) => setCharacter(response.data))
       .catch((error) => console.error(error));
   }, [id]);
