@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import "./CharacterList.css"
 import { Link } from "react-router-dom";
 import { IPeople } from "./IStarWars";
-import { range } from "../helpers/range";
+import CharacterListPagination from "./CharacterListPagination";
 
 type ApiResponse = {
   count: number;
@@ -36,19 +36,7 @@ const CharacterList = () => {
         )}
       </ul>
 
-      {maxPageCount &&
-        <div className={"CharacterList-pagination"}>
-          {
-            range(1, maxPageCount, 1).map((index: number) => {
-              if (currentPage === index) {
-                return <div key={`div${index}`}>{index}</div>
-              } else {
-                return <button key={`button${index}`} onClick={() => setCurrentPage(index)}>{index}</button>
-              }
-            })
-          }
-        </div>
-      }
+      {maxPageCount && <CharacterListPagination maxPageCount={maxPageCount} currentPage={currentPage} setCurrentPage={setCurrentPage}/>}
     </div>
   );
 }
