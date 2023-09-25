@@ -38,10 +38,16 @@ const CharacterList = () => {
   return (
     <div className="CharacterList">
       <ul>
-        {characters.map((item: IPeople, index) =>
-          <li key={item.name}>
-            <Link to={`/character/${index + 1}`}>{item.name}</Link>
-          </li>
+        {characters.map((item: IPeople, index) => {
+            let characterId: number = (currentPage - 1) * 10 + index + 1
+
+            // Workaround to fix backend bug with id and pagination 🤦‍
+            if (characterId >= 17) characterId++
+
+            return <li key={item.name}>
+              <Link to={`/character/${characterId}`}>{item.name}</Link>
+            </li>
+          }
         )}
       </ul>
 
