@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import axios, { AxiosResponse } from "axios";
 import { IPeople } from "./IStarWars";
 import { API_BASE_URl } from "../config";
-import { IMAGE_DB } from "../helpers/character-images";
+import { IMAGE_DB } from "../helpers/character-mock-images";
 
 const CharacterPage = () => {
   // @ts-ignore

@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import "./CharacterList.css"
 import { Link } from "react-router-dom";
-import { IPeople } from "./IStarWars";
+import { IPeople } from "../IStarWars";
 import CharacterListPagination from "./CharacterListPagination";
-import { API_BASE_URl } from "../config";
+import { API_BASE_URl } from "../../config";
 
 type ApiResponse = {
   count: number;

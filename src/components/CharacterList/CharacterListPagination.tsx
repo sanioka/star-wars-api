@@ -1,5 +1,5 @@
 import { FC, useMemo } from "react";
-import { range } from "../helpers/range";
+import { range } from "../../helpers/range";
 
 const CharacterListPagination: FC<Props> = ({maxPageCount, currentPage, updateCurrentPage}) => {
   const paginationList = useMemo(() => range(1, maxPageCount), [maxPageCount])

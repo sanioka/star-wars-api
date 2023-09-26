@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import './App.css';
-import CharacterList from "./components/CharacterList";
+import CharacterList from "./components/CharacterList/CharacterList";
 import CharacterPage from "./components/CharacterPage";
 import Page404 from "./components/Page404";
 
