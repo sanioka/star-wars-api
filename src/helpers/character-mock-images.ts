@@ -102,7 +102,11 @@ export const IMAGE_DB_MOCK_DATA = [
 ]
 
 // key-value O(1) storage
-export const IMAGE_DB: any = {}
+const IMAGE_DB: any = {}
 IMAGE_DB_MOCK_DATA.forEach((item: any) => {
   IMAGE_DB[item.name] = item.photo
 })
+
+export const getImageIfExist = (name = '') => {
+  return name && IMAGE_DB[name] ? IMAGE_DB[name] : null;
+}

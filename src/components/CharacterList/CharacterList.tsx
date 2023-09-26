@@ -1,30 +1,28 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
-import "./CharacterList.css"
 import { Link, useHistory } from "react-router-dom";
-import { IPeople } from "../IStarWars";
-import CharacterListPagination from "./CharacterListPagination";
-import { API_BASE_URl } from "../../config";
+import axios, { AxiosResponse } from 'axios';
+import { Card, CardBody, Image, SimpleGrid } from '@chakra-ui/react'
+
+import { API_BASE_URl, API_PAGINATION_COUNT } from "../../config";
+import { getImageIfExist } from "../../helpers/character-mock-images";
 import useQuery from "../../hooks/use-query";
 
-type ApiResponse = {
-  count: number;
-  next: string;
-  previous: string;
-  results: IPeople[];
-}
+import { ApiResponse, IPeople } from "../../api/IStarWars";
+import CharacterListPagination from "./CharacterListPagination";
+import Breadcrumbs from "../Breadcrumbs";
 
 const CharacterList = () => {
   let history = useHistory();
+
   let query = useQuery();
+  let currentPage = Number(query.get("page")) || 1
 
   const [characters, setCharacters] = useState<IPeople[]>([]);
   const [maxPageCount, setMaxPageCount] = useState<null | number>(null);
-  let currentPage = Number(query.get("page")) || 1
 
-  const updateCurrentPage = useCallback((index: number) => {
+  const updateCurrentPage = useCallback((pageIndex: number) => {
       setCharacters([])
-      history.push(`/?page=${index}`);
+      history.push(`/?page=${pageIndex}`);
     }, [history]
   )
 
@@ -40,25 +38,44 @@ const CharacterList = () => {
   if (!characters.length) return <div>Loading...</div>
 
   return (
-    <div className="CharacterList">
-      <ul>
-        {characters.map((item: IPeople, index) => {
-            let characterId: number = (currentPage - 1) * 10 + index + 1
+    <>
+      <Breadcrumbs/>
 
-            // Workaround to fix backend bug with id and pagination 🤦‍
+      <SimpleGrid columns={[2, 3, 4]} spacing={5}>
+        {characters.map((item: IPeople, index) => {
+            let characterId: number = (currentPage - 1) * API_PAGINATION_COUNT + index + 1
+
+            // Workaround to fix backend bug with id and pagination diff 🤦, because API /people/17 is shifted to /people/18
             if (characterId >= 17) characterId++
 
-            return <li key={item.name}>
-              <Link to={`/character/${characterId}`}>{item.name}</Link>
-            </li>
+            const characterImg = getImageIfExist(item.name)
+
+            return (
+              <Card key={item.name}>
+                <CardBody>
+                  <Image
+                    // boxSize='150px'
+                    objectFit='cover'
+                    src={characterImg}
+                    alt={item.name}
+                    borderRadius='lg'
+                    fallbackSrc='https://via.placeholder.com/150'
+                  />
+                  <Link to={`/character/${characterId}`}>{item.name}</Link>
+                </CardBody>
+              </Card>
+            )
           }
         )}
-      </ul>
+      </SimpleGrid>
 
-      {maxPageCount && <CharacterListPagination maxPageCount={maxPageCount}
-                                                currentPage={currentPage}
-                                                updateCurrentPage={updateCurrentPage}/>}
-    </div>
+      {maxPageCount &&
+        <CharacterListPagination
+          maxPageCount={maxPageCount}
+          currentPage={currentPage}
+          updateCurrentPage={updateCurrentPage}
+        />}
+    </>
   );
 }
 

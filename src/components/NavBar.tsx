@@ -2,16 +2,12 @@ import React from "react";
 import {
   Box,
   Flex,
-  Spacer,
   Heading,
-  Link,
-  VStack,
-  HStack,
 } from "@chakra-ui/react";
 
 function NavBar() {
   return (
-    <Box bg="teal.500" p={4} color="white">
+    <Box bg="teal.500" p={4} color="white" mb={0}>
       <Flex alignItems="center">
         <Heading size="md">Star Wars Universe</Heading>
         {/*<Spacer />*/}

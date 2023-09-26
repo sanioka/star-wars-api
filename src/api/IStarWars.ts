@@ -1,4 +1,4 @@
-// https://github.com/amitmtrn/swapi-ts/blob/main/dist/SWApi.d.ts
+// Based on https://github.com/amitmtrn/swapi-ts/blob/main/dist/SWApi.d.ts
 
 export interface IFilm {
   characters: string[] | IPeople[];
@@ -118,4 +118,11 @@ export enum ResourcesType {
   Species = 'species',
   Starships = 'starships',
   Vehicles = 'vehicles',
+}
+
+export type ApiResponse = {
+  count: number;
+  next: string;
+  previous: string;
+  results: IPeople[];
 }

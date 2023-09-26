@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import axios, { AxiosResponse } from "axios";
-import { IPeople } from "./IStarWars";
+import { IPeople } from "../api/IStarWars";
 import { API_BASE_URl } from "../config";
-import { IMAGE_DB } from "../helpers/character-mock-images";
+import { getImageIfExist } from "../helpers/character-mock-images";
 
 const CharacterPage = () => {
   // @ts-ignore
@@ -11,7 +11,7 @@ const CharacterPage = () => {
   let history = useHistory();
 
   const [character, setCharacter] = useState<IPeople | null>(null);
-  const characterImg = character?.name && IMAGE_DB[character.name] ? IMAGE_DB[character.name] : null;
+  const characterImg = getImageIfExist(character?.name)
 
   useEffect(() => {
     axios.get(`${API_BASE_URl}/people/${id}`)
