@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import "./CharacterList.css"
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { IPeople } from "../IStarWars";
 import CharacterListPagination from "./CharacterListPagination";
 import { API_BASE_URl } from "../../config";
+import useQuery from "../../hooks/use-query";
 
 type ApiResponse = {
   count: number;
@@ -14,24 +15,27 @@ type ApiResponse = {
 }
 
 const CharacterList = () => {
+  let history = useHistory();
+  let query = useQuery();
+
   const [characters, setCharacters] = useState<IPeople[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [maxPageCount, setMaxPageCount] = useState<null | number>(null);
+  let currentPage = Number(query.get("page")) || 1
 
   const updateCurrentPage = useCallback((index: number) => {
-      setCurrentPage(index)
       setCharacters([])
-    }, []
+      history.push(`/?page=${index}`);
+    }, [history]
   )
 
   useEffect(() => {
     axios.get(`${API_BASE_URl}/people/?page=${currentPage}`)
       .then((response: AxiosResponse<ApiResponse>) => {
         setCharacters(response.data.results)
-        if (!maxPageCount) setMaxPageCount(Math.ceil(response.data.count / response.data.results.length))
+        if (!maxPageCount) setMaxPageCount(Math.ceil(response.data.count / 10))
       })
       .catch((error) => console.error(error));
-  }, [currentPage]);
+  }, [currentPage, maxPageCount]);
 
   if (!characters.length) return <div>Loading...</div>
 
