@@ -19,8 +19,9 @@ const CharacterPage = () => {
       .catch((error) => console.error(error));
   }, [id]);
 
+  // TODO: refactor div
   return (
-    <div className='CharacterPage'>
+    <div>
       <a onClick={() => history.goBack()} href="#">{'< Back'}</a>
 
       {characterImg && <img src={characterImg} width="100" height="100" alt={character?.name}/>}

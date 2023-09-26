@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Container, Flex } from "@chakra-ui/react";
 
-import NavBar from "./components/NavBar";
+import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Page404 from "./components/Page404";
 import CharacterList from "./components/CharacterList/CharacterList";
@@ -11,9 +11,9 @@ import CharacterPage from "./components/CharacterPage";
 function App() {
   return (
     <Flex flexDirection="column" minH="100vh">
-      <NavBar/>
+      <Header/>
 
-      <Container maxW="container.md" bgColor="gray" flex="1">
+      <Container maxW="container.md" bgColor="white" flex="1" display="flex">
         <Router>
           <Switch>
             <Route exact path="/" component={CharacterList}/>

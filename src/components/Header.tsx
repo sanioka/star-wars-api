@@ -1,13 +1,9 @@
 import React from "react";
-import {
-  Box,
-  Flex,
-  Heading,
-} from "@chakra-ui/react";
+import { Flex, Heading, Container} from "@chakra-ui/react";
 
-function NavBar() {
+function Header() {
   return (
-    <Box bg="teal.500" p={4} color="white" mb={0}>
+    <Container bg="teal.500" pt={4} pb={4} color="white" maxW="full">
       <Flex alignItems="center">
         <Heading size="md">Star Wars Universe</Heading>
         {/*<Spacer />*/}
@@ -18,8 +14,8 @@ function NavBar() {
         {/*  <Link href="#">Contact</Link>*/}
         {/*</HStack>*/}
       </Flex>
-    </Box>
+    </Container>
   );
 }
 
-export default NavBar;
+export default Header;
