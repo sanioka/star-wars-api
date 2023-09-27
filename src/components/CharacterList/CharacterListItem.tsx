@@ -1,9 +1,7 @@
 import React, { FC } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { Image, LinkBox, LinkOverlay, Text } from "@chakra-ui/react";
-
-// TODO: refactor this feature
-const fallbackSrc = 'https://via.placeholder.com/150'
+import fallbackImageSrc from './img/fallback-img1.png';
 
 const CharacterListItem: FC<Props> = ({imageSrc, name, characterId}) => {
   return (
@@ -14,7 +12,7 @@ const CharacterListItem: FC<Props> = ({imageSrc, name, characterId}) => {
         src={imageSrc}
         alt={name}
         borderRadius='md'
-        fallbackSrc={fallbackSrc}
+        fallbackSrc={fallbackImageSrc}
       />
       <LinkOverlay as={ReactRouterLink} to={`/character/${characterId}`}>
         <Text mt='1'>{name}</Text>
