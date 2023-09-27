@@ -10,10 +10,10 @@ import CharacterPage from "./components/CharacterPage";
 
 function App() {
   return (
-    <Flex flexDirection="column" minH="100vh">
+    <Container maxW="container.lg" flexDirection="column" minH="100vh" display={'flex'}>
       <Header/>
 
-      <Container maxW="container.md" flex="1" display="flex" flexDirection="column">
+      <Flex maxW="container.lg" flex="1" flexDirection="column">
         <Router>
           <Switch>
             <Route exact path="/" component={CharacterList}/>
@@ -21,10 +21,10 @@ function App() {
             <Route path="*"><Page404/></Route>
           </Switch>
         </Router>
-      </Container>
+      </Flex>
 
       <Footer/>
-    </Flex>
+    </Container>
   );
 }
 

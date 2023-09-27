@@ -10,8 +10,8 @@ import useQuery from "../../hooks/use-query";
 import { ApiResponse, IPeople } from "../../api/IStarWars";
 import CharacterListPagination from "./CharacterListPagination";
 import CharacterListItem from "./CharacterListItem";
-// import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import LoadingSpinner from "../LoadingSpinner";
+// import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 const CharacterList = () => {
   let history = useHistory();
@@ -40,13 +40,13 @@ const CharacterList = () => {
   if (!characters.length) return <LoadingSpinner/>
 
   return (
-    <Flex flexDirection="column" justifyContent="space-between">
+    <Flex flexDirection="column">
       {/*<Breadcrumbs items={[*/}
       {/*  {name: 'Home', inactive: true},*/}
       {/*]}/>*/}
 
-      <Box flex="1" mt={4}>
-        <SimpleGrid columns={[2, 3, 4]} spacing={5}>
+      <Box flex="1" mt={4} mb={4}>
+        <SimpleGrid columns={[2, 3, 4, 5]} spacingX={8} spacingY={8}>
           {characters.map((item: IPeople, index) => {
               let characterId: number = (currentPage - 1) * API_PAGINATION_COUNT + index + 1
 

@@ -6,7 +6,7 @@ const ThemeButton = () => {
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (
-    <Button onClick={toggleColorMode} variant='ghost'>
+    <Button onClick={toggleColorMode} variant='outline'>
       {colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
     </Button>
   )

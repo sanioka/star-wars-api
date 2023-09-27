@@ -17,6 +17,14 @@ const CharacterListPagination: FC<Props> = ({maxPageCount, currentPage, updateCu
           Prev
         </Button>
 
+        {currentPage > 2 &&
+          <Button
+            onClick={() => updateCurrentPage(1)}
+            m={1}>
+            1
+          </Button>
+        }
+
         <Text ml={5} mr={5}>Page {currentPage} of {maxPageCount}</Text>
 
         <Button
