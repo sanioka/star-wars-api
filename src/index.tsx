@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
-import { ChakraProvider, CSSReset } from '@chakra-ui/react'
+import { ChakraProvider, ColorModeScript, CSSReset } from '@chakra-ui/react'
 import App from './App';
 
 const root = ReactDOM.createRoot(
@@ -12,6 +12,7 @@ root.render(
   <React.StrictMode>
     <ChakraProvider>
       <CSSReset/>
+      <ColorModeScript/>
       <App/>
     </ChakraProvider>
   </React.StrictMode>

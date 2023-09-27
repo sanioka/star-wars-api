@@ -13,7 +13,7 @@ function App() {
     <Flex flexDirection="column" minH="100vh">
       <Header/>
 
-      <Container maxW="container.md" bgColor="white" flex="1" display="flex" flexDirection="column">
+      <Container maxW="container.md" flex="1" display="flex" flexDirection="column">
         <Router>
           <Switch>
             <Route exact path="/" component={CharacterList}/>

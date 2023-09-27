@@ -1,12 +1,14 @@
 import React from "react";
-import { Flex, Heading, Container} from "@chakra-ui/react";
+import { Flex, Heading, Container, Spacer } from "@chakra-ui/react";
+import ThemeButton from "./ThemeButton";
 
 function Header() {
   return (
-    <Container bg="teal.500" pt={4} pb={4} color="white" maxW="full">
+    <Container pt={4} pb={4} maxW="full">
       <Flex alignItems="center">
         <Heading size="md">Star Wars Characters</Heading>
-        {/*<Spacer />*/}
+        <Spacer />
+        <ThemeButton/>
         {/*<HStack spacing={4}>*/}
         {/*  <Link href="#">Home</Link>*/}
         {/*  <Link href="#">About</Link>*/}
