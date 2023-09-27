@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios, { AxiosResponse } from 'axios';
-import { Box, Card, CardBody, Flex, Image, SimpleGrid } from '@chakra-ui/react'
+import { Box, Flex, SimpleGrid } from '@chakra-ui/react'
 
 import { API_BASE_URl, API_PAGINATION_COUNT } from "../../config";
 import { getImageIfExist } from "../../helpers/character-mock-images";
@@ -10,9 +10,7 @@ import useQuery from "../../hooks/use-query";
 import { ApiResponse, IPeople } from "../../api/IStarWars";
 import CharacterListPagination from "./CharacterListPagination";
 import Breadcrumbs from "../Breadcrumbs";
-
-// TODO: refactor this feature
-const fallbackSrc = 'https://via.placeholder.com/150'
+import CharacterListItem from "./CharacterListItem";
 
 const CharacterList = () => {
   let history = useHistory();
@@ -53,22 +51,10 @@ const CharacterList = () => {
               if (characterId >= 17) characterId++
 
               const characterImg = getImageIfExist(item.name)
-
-              return (
-                <Card key={item.name}>
-                  <CardBody>
-                    <Image
-                      // boxSize='150px'
-                      objectFit='cover'
-                      src={characterImg}
-                      alt={item.name}
-                      borderRadius='lg'
-                      fallbackSrc={fallbackSrc}
-                    />
-                    <Link to={`/character/${characterId}`}>{item.name}</Link>
-                  </CardBody>
-                </Card>
-              )
+              return <CharacterListItem key={item.name}
+                                        imageSrc={characterImg}
+                                        name={item.name}
+                                        characterId={characterId}/>
             }
           )}
         </SimpleGrid>
