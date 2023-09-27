@@ -9,8 +9,8 @@ import useQuery from "../../hooks/use-query";
 
 import { ApiResponse, IPeople } from "../../api/IStarWars";
 import CharacterListPagination from "./CharacterListPagination";
-import Breadcrumbs from "../Breadcrumbs";
 import CharacterListItem from "./CharacterListItem";
+import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 const CharacterList = () => {
   let history = useHistory();
@@ -40,9 +40,11 @@ const CharacterList = () => {
 
   return (
     <Flex flexDirection="column" justifyContent="space-between">
-      <Breadcrumbs/>
+      {/*<Breadcrumbs items={[*/}
+      {/*  {name: 'Home', inactive: true},*/}
+      {/*]}/>*/}
 
-      <Box flex="1">
+      <Box flex="1" mt={4}>
         <SimpleGrid columns={[2, 3, 4]} spacing={5}>
           {characters.map((item: IPeople, index) => {
               let characterId: number = (currentPage - 1) * API_PAGINATION_COUNT + index + 1
