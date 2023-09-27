@@ -11,6 +11,7 @@ import { ApiResponse, IPeople } from "../../api/IStarWars";
 import CharacterListPagination from "./CharacterListPagination";
 import CharacterListItem from "./CharacterListItem";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import LoadingSpinner from "../LoadingSpinner";
 
 const CharacterList = () => {
   let history = useHistory();
@@ -36,7 +37,7 @@ const CharacterList = () => {
       .catch((error) => console.error(error));
   }, [currentPage, maxPageCount]);
 
-  if (!characters.length) return <div>Loading...</div>
+  if (!characters.length) return <LoadingSpinner/>
 
   return (
     <Flex flexDirection="column" justifyContent="space-between">
