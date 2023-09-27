@@ -1,5 +1,5 @@
 import React, { CSSProperties } from "react";
-import { Center, Flex, Link, Text, VStack } from "@chakra-ui/react";
+import { Center, Flex, Link, Show, Text, VStack } from "@chakra-ui/react";
 
 // example with style prop
 const footerStyle: CSSProperties = {
@@ -18,9 +18,11 @@ function Footer() {
           {/*<Text w={15} textAlign="center">|</Text>*/}
           {/*<Link href="mailto:isanioka@gmail.com">isanioka@gmail.com</Link>*/}
         </Flex>
-        <Flex flexDirection="row">
+        <Flex flexDirection={{base: 'column', xl: "row"}}>
           <Text>Used swapi.dev API and data from Wookiepedia</Text>
-          <Text w={15} textAlign="center">|</Text>
+          <Show above='xl'>
+            <Text w={15} textAlign="center">|</Text>
+          </Show>
           <Text>Star Wars and all associated names are copyright Lucasfilm ltd</Text>
         </Flex>
       </VStack>

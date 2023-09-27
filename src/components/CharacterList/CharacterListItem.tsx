@@ -10,9 +10,9 @@ const CharacterListItem: FC<Props> = ({imageSrc, name, characterId}) => {
         <Image
           // boxSize='150px'
           maxW='150px'
-          maxH='200px'
+          // maxH='200px'
           // w='150px'
-          // h='200px'
+          h='200px'
           objectFit='cover'
           src={imageSrc}
           alt={name}

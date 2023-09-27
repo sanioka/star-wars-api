@@ -6,7 +6,7 @@ import axios, { AxiosResponse } from "axios";
 import { API_BASE_URl, IS_DEBUG } from "../config";
 import { IPeople } from "../api/IStarWars";
 import Breadcrumbs from "./Breadcrumbs/Breadcrumbs";
-import LoadingSpinner from './LoadingSpinner';
+import LoadingSpinner from './App/LoadingSpinner';
 
 import { getImageIfExist } from "../helpers/character-mock-images";
 import fallbackImageSrc from "./CharacterList/img/fallback-img1.png";
@@ -27,25 +27,25 @@ const CharacterPage = () => {
   if (!characterData) return <LoadingSpinner/>
 
   return (
-    <Flex flexDirection='column' justifyContent="space-between" mb={[4,8]}>
+    <Flex flexDirection='column' justifyContent="space-between" mb={[4,8]} w={{base: '100%', lg: "75%"}}>
       <Breadcrumbs items={[
         {name: 'Home'},
         {name: characterData?.name || '', inactive: true},
       ]}/>
 
       <Flex flexDirection={['column', 'row']} borderRadius='md' p={[4,8]} borderWidth='1px' alignItems='top' position={'relative'}>
-        <Box w={150}>
+        <Flex w={150} justifyContent='center'>
           <Image
-            // w={150}
-            // maxH={200}
             // boxSize='150px'
+            maxW='150px'
+            maxH='200px'
             objectFit='cover'
             src={characterImg}
             alt={characterData?.name}
             borderRadius='md'
             fallbackSrc={fallbackImageSrc}
           />
-        </Box>
+        </Flex>
 
         <VStack ml={[0,8]} mt={[4,0]} alignItems='left' flex={1}>
           <Heading as='h4' size='sm' mb={1}>

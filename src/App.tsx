@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Container, Flex } from "@chakra-ui/react";
 
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Page404 from "./components/Page404";
+import Header from "./components/App/Header/Header";
+import Footer from "./components/App/Footer";
+import Page404 from "./components/App/Page404";
 import CharacterList from "./components/CharacterList/CharacterList";
 import CharacterPage from "./components/CharacterPage";
 
