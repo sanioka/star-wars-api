@@ -7,9 +7,9 @@ import { Link as ReactRouterLink } from "react-router-dom";
 const Breadcrumbs: FC<Props> = ({items}) => {
   return (
     <Breadcrumb spacing='8px' separator={<ChevronRightIcon color='gray.500'/>} mt={2} mb={4}>
-      {items.map((item) => {
+      {items.map((item, index) => {
         return (
-          <BreadcrumbItem isCurrentPage={item.inactive}>
+          <BreadcrumbItem isCurrentPage={item.inactive} key={index + item.name}>
             {
               item.inactive
                 ? <BreadcrumbLink>{item.name}</BreadcrumbLink>

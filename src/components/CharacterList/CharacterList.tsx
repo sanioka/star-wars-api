@@ -10,7 +10,7 @@ import useQuery from "../../hooks/use-query";
 import { ApiResponse, IPeople } from "../../api/IStarWars";
 import CharacterListPagination from "./CharacterListPagination";
 import CharacterListItem from "./CharacterListItem";
-import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+// import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import LoadingSpinner from "../LoadingSpinner";
 
 const CharacterList = () => {
