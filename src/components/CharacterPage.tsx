@@ -12,8 +12,9 @@ import { getImageIfExist } from '../helpers/character-mock-images'
 import fallbackImageSrc from './CharacterList/img/fallback-img1.png'
 
 const CharacterPage = () => {
-  // @ts-ignore
-  const { id } = useParams()
+  const { id } = useParams() as {
+    id: string
+  }
 
   const [characterData, setCharacterData] = useState<IPeople | null>(null)
   const characterImg = getImageIfExist(characterData?.name)

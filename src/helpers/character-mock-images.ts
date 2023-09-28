@@ -1,4 +1,4 @@
-export const IMAGE_DB_MOCK_DATA = [
+export const IMAGE_DB_MOCK_DATA: ImageMockData[] = [
   {
     id: 1,
     name: 'Luke Skywalker',
@@ -102,11 +102,21 @@ export const IMAGE_DB_MOCK_DATA = [
 ]
 
 // key-value O(1) storage
-const IMAGE_DB: any = {}
-IMAGE_DB_MOCK_DATA.forEach((item: any) => {
+const IMAGE_DB: ImageData = {}
+IMAGE_DB_MOCK_DATA.forEach((item: ImageMockData) => {
   IMAGE_DB[item.name] = item.photo
 })
 
 export const getImageIfExist = (name = '') => {
-  return name && IMAGE_DB[name] ? IMAGE_DB[name] : null
+  return name && IMAGE_DB[name] ? IMAGE_DB[name] : undefined
+}
+
+type ImageMockData = {
+  id: number
+  name: string
+  photo: string
+}
+
+type ImageData = {
+  [key: string]: string | undefined
 }
