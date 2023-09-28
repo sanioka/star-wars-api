@@ -1,13 +1,29 @@
-import React from 'react'
-import { Heading, Spacer, Flex } from '@chakra-ui/react'
+import { Heading, Spacer, Flex, LinkBox, LinkOverlay } from '@chakra-ui/react'
 import ThemeButton from './ThemeButton'
+import { Link as ReactRouterLink, useLocation } from 'react-router-dom'
 
 function Header() {
-  return (
-    <Flex pt={4} pb={4} alignItems="center">
+  const location = useLocation()
+
+  const Logo = () => {
+    return (
       <Heading size="md" as="div">
         Star Wars Characters
       </Heading>
+    )
+  }
+
+  return (
+    <Flex pt={4} pb={4} alignItems="center">
+      {location.pathname === '/' ? (
+        <Logo />
+      ) : (
+        <LinkBox as="div">
+          <LinkOverlay as={ReactRouterLink} to="/">
+            <Logo />
+          </LinkOverlay>
+        </LinkBox>
+      )}
       <Spacer />
       <ThemeButton />
       {/*<HStack spacing={4}>*/}
