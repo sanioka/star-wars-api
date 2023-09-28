@@ -1,5 +1,5 @@
 import React, { CSSProperties } from "react";
-import { Center, Flex, Link, Show, Text, VStack } from "@chakra-ui/react";
+import { Center, Flex, Show, Text, VStack } from "@chakra-ui/react";
 
 // example with style prop
 const footerStyle: CSSProperties = {

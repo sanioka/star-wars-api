@@ -14,10 +14,10 @@ import LoadingSpinner from "../App/LoadingSpinner";
 // import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 const CharacterList = () => {
-  let history = useHistory();
+  const history = useHistory();
 
-  let query = useQuery();
-  let currentPage = Number(query.get("page")) || 1
+  const query = useQuery();
+  const currentPage = Number(query.get("page")) || 1
 
   const [characters, setCharacters] = useState<IPeople[]>([]);
   const [maxPageCount, setMaxPageCount] = useState<null | number>(null);

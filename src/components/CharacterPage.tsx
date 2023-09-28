@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Flex, HStack, Box, Image, VStack, Text, Heading, Container } from "@chakra-ui/react";
+import { Flex, Box, Image, VStack, Text, Heading } from "@chakra-ui/react";
 import axios, { AxiosResponse } from "axios";
 
 import { API_BASE_URl, IS_DEBUG } from "../config";
