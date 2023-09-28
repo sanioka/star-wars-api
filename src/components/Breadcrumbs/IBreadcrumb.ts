@@ -1,5 +1,5 @@
 export interface IBreadcrumb {
-  name: string;
-  url?: string;
-  inactive?: boolean;
+  name: string
+  url?: string
+  inactive?: boolean
 }
