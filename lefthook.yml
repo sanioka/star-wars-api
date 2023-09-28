@@ -38,9 +38,12 @@
 # Refer for explanation to following link:
 # https://github.com/Arkweid/lefthook/blob/master/docs/full_guide.md
 
+rc: ~/.lefthookrc
 pre-commit:
   parallel: true
   commands:
+#    0_debug:
+#    run: echo $PATH
     eslint:
       glob: "*.{js,ts,tsx}"
       run: npx prettier --write {staged_files} && git add {staged_files}
