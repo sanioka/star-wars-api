@@ -13,7 +13,7 @@ import fallbackImageSrc from './CharacterList/img/fallback-img1.png'
 const CharacterPage = () => {
   const { id } = useParams() as { id: string }
 
-  const { isLoading, data } = useQuery(`character${id}`, () => axios.get(`${API_BASE_URl}/people/${id}`))
+  const { isLoading, data } = useQuery(`characterPage-${id}`, () => axios.get(`${API_BASE_URl}/people/${id}`))
   const characterData = data?.data
 
   if (isLoading) return <LoadingSpinner />
