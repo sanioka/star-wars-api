@@ -17,15 +17,13 @@ const CharacterListPagination: FC<Props> = ({ maxPageCount, currentPage, updateC
   if (isMobile) {
     return (
       <Flex justifyContent="center" mb={1} mt={4} alignItems="center">
+        <Button onClick={updateCurrentPageHandler(1)} m={1} isDisabled={currentPage === 1}>
+          1
+        </Button>
+
         <Button isDisabled={currentPage === 1} onClick={updateCurrentPageHandler(currentPage - 1)} m={1}>
           Prev
         </Button>
-
-        {currentPage > 2 && (
-          <Button onClick={updateCurrentPageHandler(1)} m={1}>
-            1
-          </Button>
-        )}
 
         <Text ml={5} mr={5}>
           Page {currentPage} of {maxPageCount}
@@ -33,6 +31,10 @@ const CharacterListPagination: FC<Props> = ({ maxPageCount, currentPage, updateC
 
         <Button isDisabled={currentPage === maxPageCount} onClick={updateCurrentPageHandler(currentPage + 1)} m={1}>
           Next
+        </Button>
+
+        <Button onClick={updateCurrentPageHandler(maxPageCount)} m={1} isDisabled={currentPage === maxPageCount}>
+          {maxPageCount}
         </Button>
       </Flex>
     )
