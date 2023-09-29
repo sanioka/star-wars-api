@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Flex, Box, Image, VStack, Text, Heading } from '@chakra-ui/react'
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
+import { useQuery } from 'react-query'
 
 import { API_BASE_URl, IS_DEBUG } from '../config'
-import { IPeople } from '../api/IStarWars'
 import Breadcrumbs from './Breadcrumbs/Breadcrumbs'
 import LoadingSpinner from './App/LoadingSpinner'
 
@@ -12,21 +11,12 @@ import { getImageIfExist } from '../helpers/character-mock-images'
 import fallbackImageSrc from './CharacterList/img/fallback-img1.png'
 
 const CharacterPage = () => {
-  const { id } = useParams() as {
-    id: string
-  }
+  const { id } = useParams() as { id: string }
 
-  const [characterData, setCharacterData] = useState<IPeople | null>(null)
-  const characterImg = getImageIfExist(characterData?.name)
+  const { isLoading, data } = useQuery(`character${id}`, () => axios.get(`${API_BASE_URl}/people/${id}`))
+  const characterData = data?.data
 
-  useEffect(() => {
-    axios
-      .get(`${API_BASE_URl}/people/${id}`)
-      .then((response: AxiosResponse<IPeople>) => setCharacterData(response.data))
-      .catch((error) => console.error(error))
-  }, [id])
-
-  if (!characterData) return <LoadingSpinner />
+  if (isLoading) return <LoadingSpinner />
 
   return (
     <Flex flexDirection="column" justifyContent="space-between" mb={[4, 8]} w={{ base: '100%', lg: '75%' }}>
@@ -46,7 +36,7 @@ const CharacterPage = () => {
             maxW="150px"
             maxH="200px"
             objectFit="cover"
-            src={characterImg}
+            src={getImageIfExist(characterData?.name)}
             alt={characterData?.name}
             borderRadius="md"
             fallbackSrc={fallbackImageSrc}

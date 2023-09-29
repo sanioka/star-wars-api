@@ -1,18 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import reportWebVitals from './reportWebVitals'
+
 import { ChakraProvider, ColorModeScript, CSSReset } from '@chakra-ui/react'
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+import reportWebVitals from './reportWebVitals'
 import App from './components/App'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+const queryClient = new QueryClient()
 
 root.render(
   <React.StrictMode>
-    <ChakraProvider>
-      <CSSReset />
-      <ColorModeScript />
-      <App />
-    </ChakraProvider>
+    <QueryClientProvider client={queryClient}>
+      <ChakraProvider>
+        <CSSReset />
+        <ColorModeScript />
+        <App />
+      </ChakraProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
 )
 
