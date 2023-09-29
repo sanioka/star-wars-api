@@ -1,9 +1,11 @@
 import { Heading, Spacer, Flex, LinkBox, LinkOverlay } from '@chakra-ui/react'
 import ThemeButton from './ThemeButton'
 import { Link as ReactRouterLink, useLocation } from 'react-router-dom'
+import useSearchParams from '../../../hooks/use-search-params'
 
 function Header() {
   const location = useLocation()
+  const searchParams = useSearchParams()
 
   const Logo = () => {
     return (
@@ -13,9 +15,11 @@ function Header() {
     )
   }
 
+  const isHeaderPassive = location.pathname === '/' && ['1', null].includes(searchParams.get('page'))
+
   return (
     <Flex pt={4} pb={4} alignItems="center">
-      {location.pathname === '/' ? (
+      {isHeaderPassive ? (
         <Logo />
       ) : (
         <LinkBox as="div">

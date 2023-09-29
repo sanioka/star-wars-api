@@ -1,11 +1,11 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { Box, Flex, SimpleGrid } from '@chakra-ui/react'
 import axios, { AxiosResponse } from 'axios'
 import { useQuery } from '@tanstack/react-query'
 
-import { API_BASE_URl, API_PAGINATION_COUNT, SHOW_BREADCRUMBS_ON_HOMEPAGE } from '../../config'
+import { API_BASE_URl, API_PAGINATION_COUNT } from '../../config'
 import { ApiResponse, IPeople } from '../../api/IStarWars'
 import useSearchParams from '../../hooks/use-search-params'
 import { getImageIfExist } from '../../helpers/character-mock-images'
@@ -15,6 +15,7 @@ import CharacterListPagination from './CharacterListPagination'
 import CharacterListItem from './CharacterListItem'
 import LoadingSpinner from '../App/LoadingSpinner'
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
+import { scrollOnTop } from '../../helpers/scroll-on-top'
 
 const CharacterList = () => {
   const history = useHistory()
@@ -37,11 +38,13 @@ const CharacterList = () => {
   const characters = data?.results
   const maxPageCount = useMemo(() => (data ? Math.ceil(data.count / 10) : 0), [data])
 
+  useEffect(() => scrollOnTop(), [currentPage])
+
   if (isLoading) return <LoadingSpinner />
 
   return (
     <Flex flexDirection="column">
-      {SHOW_BREADCRUMBS_ON_HOMEPAGE && <Breadcrumbs items={[{ name: 'Home', inactive: true }]} />}
+      {currentPage > 1 && <Breadcrumbs items={[{ name: 'Home' }, { name: `Page ${currentPage}`, inactive: true }]} />}
 
       <Box flex="1" mt={4} mb={4}>
         <SimpleGrid columns={[2, 3, 4, 5]} spacingX={8} spacingY={8}>

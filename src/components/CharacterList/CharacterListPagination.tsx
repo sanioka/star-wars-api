@@ -21,15 +21,17 @@ const CharacterListPagination: FC<Props> = ({ maxPageCount, currentPage, updateC
           Prev
         </Button>
 
-        {currentPage > 2 && (
-          <Button onClick={updateCurrentPageHandler(1)} m={1}>
-            1
-          </Button>
-        )}
+        <Button onClick={updateCurrentPageHandler(1)} m={1} isDisabled={currentPage === 1}>
+          1
+        </Button>
 
         <Text ml={5} mr={5}>
           Page {currentPage} of {maxPageCount}
         </Text>
+
+        <Button onClick={updateCurrentPageHandler(maxPageCount)} m={1} isDisabled={currentPage === maxPageCount}>
+          {maxPageCount}
+        </Button>
 
         <Button isDisabled={currentPage === maxPageCount} onClick={updateCurrentPageHandler(currentPage + 1)} m={1}>
           Next

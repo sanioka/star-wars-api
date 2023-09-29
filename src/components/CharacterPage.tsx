@@ -9,6 +9,8 @@ import LoadingSpinner from './App/LoadingSpinner'
 
 import { getImageIfExist } from '../helpers/character-mock-images'
 import fallbackImageSrc from './CharacterList/img/fallback-img1.png'
+import { useEffect } from 'react'
+import { scrollOnTop } from '../helpers/scroll-on-top'
 
 const CharacterPage = () => {
   const { id } = useParams() as { id: string }
@@ -17,6 +19,8 @@ const CharacterPage = () => {
     staleTime: Infinity,
   })
   const characterData = data?.data
+
+  useEffect(() => scrollOnTop(), [])
 
   if (isLoading) return <LoadingSpinner />
 
@@ -38,10 +42,10 @@ const CharacterPage = () => {
             maxW="150px"
             maxH="200px"
             objectFit="cover"
-            src={getImageIfExist(characterData?.name)}
+            src={getImageIfExist(characterData?.name) || fallbackImageSrc}
             alt={characterData?.name}
             borderRadius="md"
-            fallbackSrc={fallbackImageSrc}
+            // fallbackSrc={fallbackImageSrc}
           />
         </Flex>
 
