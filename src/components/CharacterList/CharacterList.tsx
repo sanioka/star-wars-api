@@ -8,7 +8,7 @@ import { useQuery } from 'react-query'
 import { API_BASE_URl, API_PAGINATION_COUNT, SHOW_BREADCRUMBS_ON_HOMEPAGE } from '../../config'
 import { getImageIfExist } from '../../helpers/character-mock-images'
 import { ApiResponse, IPeople } from '../../api/IStarWars'
-import useSearchParams from '../../hooks/use-query'
+import useSearchParams from '../../hooks/use-search-params'
 
 import CharacterListPagination from './CharacterListPagination'
 import CharacterListItem from './CharacterListItem'
@@ -23,10 +23,16 @@ const CharacterList = () => {
 
   const updateCurrentPage = useCallback((pageIndex: number) => history.push(`/?page=${pageIndex}`), [history])
 
-  const { isLoading, data } = useQuery(`characterList-page${currentPage}`, async () => {
-    const response: AxiosResponse<ApiResponse> = await axios.get(`${API_BASE_URl}/people/?page=${currentPage}`)
-    return response.data
-  })
+  const { isLoading, data } = useQuery(
+    `characterList-page${currentPage}`,
+    async () => {
+      const response: AxiosResponse<ApiResponse> = await axios.get(`${API_BASE_URl}/people/?page=${currentPage}`)
+      return response.data
+    },
+    {
+      staleTime: Infinity,
+    },
+  )
   const characters = data?.results
   const maxPageCount = useMemo(() => (data ? Math.ceil(data.count / 10) : 0), [data])
 
