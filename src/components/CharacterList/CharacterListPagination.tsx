@@ -17,24 +17,24 @@ const CharacterListPagination: FC<Props> = ({ maxPageCount, currentPage, updateC
   if (isMobile) {
     return (
       <Flex justifyContent="center" mb={1} mt={4} alignItems="center">
-        <Button isDisabled={currentPage === 1} onClick={updateCurrentPageHandler(currentPage - 1)} m={1}>
-          Prev
-        </Button>
-
         <Button onClick={updateCurrentPageHandler(1)} m={1} isDisabled={currentPage === 1}>
           1
+        </Button>
+
+        <Button isDisabled={currentPage === 1} onClick={updateCurrentPageHandler(currentPage - 1)} m={1}>
+          Prev
         </Button>
 
         <Text ml={5} mr={5}>
           Page {currentPage} of {maxPageCount}
         </Text>
 
-        <Button onClick={updateCurrentPageHandler(maxPageCount)} m={1} isDisabled={currentPage === maxPageCount}>
-          {maxPageCount}
-        </Button>
-
         <Button isDisabled={currentPage === maxPageCount} onClick={updateCurrentPageHandler(currentPage + 1)} m={1}>
           Next
+        </Button>
+
+        <Button onClick={updateCurrentPageHandler(maxPageCount)} m={1} isDisabled={currentPage === maxPageCount}>
+          {maxPageCount}
         </Button>
       </Flex>
     )
