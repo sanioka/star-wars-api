@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { Flex, Box, Image, VStack, Text, Heading } from '@chakra-ui/react'
 import axios from 'axios'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 
 import { API_BASE_URl, IS_DEBUG } from '../config'
 import Breadcrumbs from './Breadcrumbs/Breadcrumbs'
@@ -13,7 +13,7 @@ import fallbackImageSrc from './CharacterList/img/fallback-img1.png'
 const CharacterPage = () => {
   const { id } = useParams() as { id: string }
 
-  const { isLoading, data } = useQuery(`characterPage-${id}`, () => axios.get(`${API_BASE_URl}/people/${id}`), {
+  const { isLoading, data } = useQuery([`characterPage-${id}`], () => axios.get(`${API_BASE_URl}/people/${id}`), {
     staleTime: Infinity,
   })
   const characterData = data?.data

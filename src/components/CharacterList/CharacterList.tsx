@@ -3,12 +3,13 @@ import { useHistory } from 'react-router-dom'
 
 import { Box, Flex, SimpleGrid } from '@chakra-ui/react'
 import axios, { AxiosResponse } from 'axios'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 
 import { API_BASE_URl, API_PAGINATION_COUNT, SHOW_BREADCRUMBS_ON_HOMEPAGE } from '../../config'
-import { getImageIfExist } from '../../helpers/character-mock-images'
 import { ApiResponse, IPeople } from '../../api/IStarWars'
 import useSearchParams from '../../hooks/use-search-params'
+import { getImageIfExist } from '../../helpers/character-mock-images'
+import fallbackImageSrc from './img/fallback-img1.png'
 
 import CharacterListPagination from './CharacterListPagination'
 import CharacterListItem from './CharacterListItem'
@@ -24,7 +25,7 @@ const CharacterList = () => {
   const updateCurrentPage = useCallback((pageIndex: number) => history.push(`/?page=${pageIndex}`), [history])
 
   const { isLoading, data } = useQuery(
-    `characterList-page${currentPage}`,
+    [`characterList-page${currentPage}`],
     async () => {
       const response: AxiosResponse<ApiResponse> = await axios.get(`${API_BASE_URl}/people/?page=${currentPage}`)
       return response.data
@@ -51,7 +52,7 @@ const CharacterList = () => {
               // Workaround to fix backend bug with id and pagination diff 🤦, because API /people/17 is shifted to /people/18
               if (characterId >= 17) characterId++
 
-              const characterImg = getImageIfExist(item.name)
+              const characterImg = getImageIfExist(item.name) || fallbackImageSrc
               return (
                 <CharacterListItem key={item.name} imageSrc={characterImg} name={item.name} characterId={characterId} />
               )

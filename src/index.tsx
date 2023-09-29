@@ -1,28 +1,49 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 
-import { ChakraProvider, ColorModeScript, CSSReset } from '@chakra-ui/react'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'
 
-import reportWebVitals from './reportWebVitals'
+import { ChakraProvider, ColorModeScript, CSSReset } from '@chakra-ui/react'
 import App from './components/App'
+import { IS_DEBUG } from './config'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      cacheTime: 1000 * 60 * 60 * 24 * 2, // 48 hours
+    },
+  },
+})
 
-root.render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
+const persister = createSyncStoragePersister({
+  storage: window.localStorage,
+})
+
+function AppRoot() {
+  const [isDevtools, setIsDevtools] = useState(IS_DEBUG)
+  useEffect(() => {
+    // @ts-ignore
+    window.toggleDevtools = () => setIsDevtools((state) => !state)
+  }, [])
+
+  return (
+    <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
       <ChakraProvider>
         <CSSReset />
         <ColorModeScript />
         <App />
       </ChakraProvider>
-    </QueryClientProvider>
+      {isDevtools && <ReactQueryDevtools initialIsOpen={false} />}
+    </PersistQueryClientProvider>
+  )
+}
+
+root.render(
+  <React.StrictMode>
+    <AppRoot />
   </React.StrictMode>,
 )
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals()
