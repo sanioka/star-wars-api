@@ -1,12 +1,11 @@
 import React, { useCallback, useEffect, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
-
 import { Box, Flex, SimpleGrid } from '@chakra-ui/react'
-import axios, { AxiosResponse } from 'axios'
 import { useQuery } from '@tanstack/react-query'
 
-import { API_BASE_URl, API_PAGINATION_COUNT } from '../../config'
-import { ApiResponse, IPeople } from '../../api/IStarWars'
+import { API_PAGINATION_COUNT } from '../../config'
+import { fetchCharacterList } from '../../api/star-wars-api'
+import { IPeople } from '../../api/IStarWars'
 import useSearchParams from '../../hooks/use-search-params'
 import { getImageIfExist } from '../../helpers/character-mock-images'
 import fallbackImageSrc from './img/fallback-img1.png'
@@ -25,16 +24,9 @@ const CharacterList = () => {
 
   const updateCurrentPage = useCallback((pageIndex: number) => history.push(`/?page=${pageIndex}`), [history])
 
-  const { isLoading, data } = useQuery(
-    [`characterList-page${currentPage}`],
-    async () => {
-      const response: AxiosResponse<ApiResponse> = await axios.get(`${API_BASE_URl}/people/?page=${currentPage}`)
-      return response.data
-    },
-    {
-      staleTime: Infinity,
-    },
-  )
+  const { isLoading, data } = useQuery([`characterList-page${currentPage}`], () => fetchCharacterList(currentPage), {
+    staleTime: Infinity,
+  })
   const characters = data?.results
   const maxPageCount = useMemo(() => (data ? Math.ceil(data.count / 10) : 0), [data])
 

@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom'
 import { Flex, Box, Image, VStack, Text, Heading } from '@chakra-ui/react'
-import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 
-import { API_BASE_URl, IS_DEBUG } from '../config'
+import { IS_DEBUG } from '../config'
+import { fetchCharacter } from '../api/star-wars-api'
 import Breadcrumbs from './Breadcrumbs/Breadcrumbs'
 import LoadingSpinner from './App/LoadingSpinner'
 
@@ -15,10 +15,9 @@ import { scrollOnTop } from '../helpers/scroll-on-top'
 const CharacterPage = () => {
   const { id } = useParams() as { id: string }
 
-  const { isLoading, data } = useQuery([`characterPage-${id}`], () => axios.get(`${API_BASE_URl}/people/${id}`), {
+  const { isLoading, data: characterData } = useQuery([`characterPage-${id}`], () => fetchCharacter(id), {
     staleTime: Infinity,
   })
-  const characterData = data?.data
 
   useEffect(() => scrollOnTop(), [])
 
