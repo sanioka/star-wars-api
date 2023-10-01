@@ -9,6 +9,7 @@ import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persist
 import { ChakraProvider, ColorModeScript, CSSReset } from '@chakra-ui/react'
 import App from './components/App'
 import { IS_DEBUG } from './config'
+import theme from './components/App/theme'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 const queryClient = new QueryClient({
@@ -32,9 +33,9 @@ function AppRoot() {
 
   return (
     <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <CSSReset />
-        <ColorModeScript />
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <App />
       </ChakraProvider>
       {isDevtools && <ReactQueryDevtools initialIsOpen={false} />}
