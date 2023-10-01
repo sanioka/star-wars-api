@@ -1,10 +1,12 @@
+import { FC } from 'react'
 import { Button, Flex, Text } from '@chakra-ui/react'
 import { Link as ReactRouterLink } from 'react-router-dom'
 
-const Page404 = () => {
+const defaultMessage = 'Error 404: Page not found'
+const PageError: FC<Props> = ({ message }) => {
   return (
     <Flex flexDirection="column" alignItems="center" justifyContent="center" flex={1}>
-      <Text>Error 404: Page not found</Text>
+      <Text>{message ? `Error: ${message}` : defaultMessage}</Text>
       <Button mt={4} as={ReactRouterLink} to={'/'}>
         Home
       </Button>
@@ -12,4 +14,8 @@ const Page404 = () => {
   )
 }
 
-export default Page404
+type Props = {
+  message?: string
+}
+
+export default PageError

@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Flex, Box, Image, VStack, Text, Heading } from '@chakra-ui/react'
 import { useQuery } from '@tanstack/react-query'
@@ -9,18 +10,34 @@ import LoadingSpinner from './App/LoadingSpinner'
 
 import { getImageIfExist } from '../helpers/character-mock-images'
 import fallbackImageSrc from './CharacterList/img/fallback-img1.png'
-import { useEffect } from 'react'
 import { scrollOnTop } from '../helpers/scroll-on-top'
+import PageError from './App/PageError'
+import { isValidId } from '../helpers/validators'
 
 const CharacterPage = () => {
   const { id } = useParams() as { id: string }
 
-  const { isLoading, data: characterData } = useQuery([`characterPage-${id}`], () => fetchCharacter(id), {
-    staleTime: Infinity,
-  })
+  const {
+    isLoading,
+    data: characterData,
+    isError,
+    error,
+  } = useQuery(
+    [`characterPage-${id}`],
+    () => (isValidId(id) ? fetchCharacter(id) : Promise.reject('Invalid id from url')),
+    {
+      staleTime: Infinity,
+    },
+  )
 
   useEffect(() => scrollOnTop(), [])
 
+  if (!isValidId(id)) return <PageError />
+
+  if (isError) {
+    // @ts-ignore
+    return <PageError message={error?.message ? error.message : JSON.stringify(error)} />
+  }
   if (isLoading) return <LoadingSpinner />
 
   return (

@@ -15,22 +15,36 @@ import CharacterListItem from './CharacterListItem'
 import LoadingSpinner from '../App/LoadingSpinner'
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
 import { scrollOnTop } from '../../helpers/scroll-on-top'
+import { isValidId } from '../../helpers/validators'
+import PageError from '../App/PageError'
 
 const CharacterList = () => {
   const history = useHistory()
 
   const searchParams = useSearchParams()
-  const currentPage = Number(searchParams.get('page')) || 1
+  const currentPageParam = searchParams.get('page') || '1'
+  const currentPage = Number(currentPageParam)
 
   const updateCurrentPage = useCallback((pageIndex: number) => history.push(`/?page=${pageIndex}`), [history])
 
-  const { isLoading, data } = useQuery([`characterList-page${currentPage}`], () => fetchCharacterList(currentPage), {
-    staleTime: Infinity,
-  })
+  const { isLoading, data, isError, error } = useQuery(
+    [`characterList-page${currentPage}`],
+    () => (isValidId(currentPageParam) ? fetchCharacterList(currentPage) : Promise.reject('Invalid page id from url')),
+    {
+      staleTime: Infinity,
+    },
+  )
   const characters = data?.results
   const maxPageCount = useMemo(() => (data ? Math.ceil(data.count / 10) : 0), [data])
 
   useEffect(() => scrollOnTop(), [currentPage])
+
+  if (!isValidId(currentPageParam)) return <PageError />
+
+  if (isError) {
+    // @ts-ignore
+    return <PageError message={error?.message ? error.message : JSON.stringify(error)} />
+  }
 
   if (isLoading) return <LoadingSpinner />
 
