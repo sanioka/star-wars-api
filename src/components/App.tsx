@@ -6,7 +6,7 @@ import Header from './App/Header/Header'
 import Footer from './App/Footer'
 import PageError from './App/PageError'
 import CharacterList from './CharacterList/CharacterList'
-import CharacterPage from './CharacterPage'
+import CharacterPage from './CharacterPage/CharacterPage'
 
 function App() {
   return (
