@@ -88,7 +88,7 @@ const CharacterPage = () => {
           <Flex alignItems="baseline" justifyContent="space-between">
             <Box>
               {storage && (
-                <Text color="gray.500" mt={2}>
+                <Text color="gray.500" mt={2} mb={[isEditMode ? 0 : 4, 0]}>
                   &#9888; Data edited locally only on your computer
                 </Text>
               )}
@@ -97,7 +97,7 @@ const CharacterPage = () => {
             {isEditMode && (
               <Flex minW="4em" color="gray.500" justifyContent="right" alignItems="center" mt={1}>
                 <Text cursor="pointer" onClick={() => setEditMode(false)}>
-                  Save
+                  {storage ? 'Save' : 'Cancel'}
                 </Text>
               </Flex>
             )}
