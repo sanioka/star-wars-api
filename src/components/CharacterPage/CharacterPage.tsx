@@ -9,7 +9,6 @@ import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
 import LoadingSpinner from '../App/LoadingSpinner'
 
 import { getImageIfExist } from '../../helpers/character-mock-images'
-import fallbackImageSrc from '../CharacterList/img/fallback-img1.png'
 import { scrollOnTop } from '../../helpers/scroll-on-top'
 import PageError from '../App/PageError'
 import { isValidId } from '../../helpers/validators'
@@ -68,7 +67,7 @@ const CharacterPage = () => {
             maxW="150px"
             maxH="200px"
             objectFit="cover"
-            src={getImageIfExist(characterData?.name) || fallbackImageSrc}
+            src={getImageIfExist(characterData?.name)}
             alt={characterData?.name}
             borderRadius="md"
           />

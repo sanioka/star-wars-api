@@ -1,3 +1,5 @@
+import fallbackImageSrc from '../assets/img/fallback-img1.png'
+
 export const IMAGE_DB_MOCK_DATA: ImageMockData[] = [
   {
     id: 1,
@@ -108,7 +110,7 @@ IMAGE_DB_MOCK_DATA.forEach((item: ImageMockData) => {
 })
 
 export const getImageIfExist = (name = '') => {
-  return name && IMAGE_DB[name] ? IMAGE_DB[name] : undefined
+  return name && IMAGE_DB[name] ? IMAGE_DB[name] : fallbackImageSrc
 }
 
 type ImageMockData = {

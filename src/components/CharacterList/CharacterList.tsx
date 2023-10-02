@@ -8,7 +8,6 @@ import { fetchCharacterList } from '../../api/star-wars-api'
 import { IPeople } from '../../api/IStarWars'
 import useSearchParams from '../../hooks/use-search-params'
 import { getImageIfExist } from '../../helpers/character-mock-images'
-import fallbackImageSrc from './img/fallback-img1.png'
 
 import CharacterListPagination from './CharacterListPagination'
 import CharacterListItem from './CharacterListItem'
@@ -61,7 +60,7 @@ const CharacterList = () => {
               // Workaround to fix backend bug with id and pagination diff 🤦, because API /people/17 is shifted to /people/18
               if (characterId >= 17) characterId++
 
-              const characterImg = getImageIfExist(item.name) || fallbackImageSrc
+              const characterImg = getImageIfExist(item.name)
               return (
                 <CharacterListItem key={item.name} imageSrc={characterImg} name={item.name} characterId={characterId} />
               )

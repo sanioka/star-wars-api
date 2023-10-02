@@ -16,7 +16,6 @@ const CharacterListItem: FC<Props> = ({ imageSrc, name, characterId }) => {
           src={imageSrc}
           alt={name}
           borderRadius="md"
-          // fallbackSrc={fallbackImageSrc}
         />
         <LinkOverlay as={ReactRouterLink} to={`/character/${characterId}`}>
           <Text mt="1">{name}</Text>
