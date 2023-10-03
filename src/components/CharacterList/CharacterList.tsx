@@ -16,6 +16,7 @@ import Breadcrumbs from '../Breadcrumbs'
 import { scrollOnTop } from '../../helpers/scroll-on-top'
 import { isValidId } from '../../helpers/validators'
 import PageError from '../App/PageError'
+import { useCharacterStore } from '../../store/store'
 
 const CharacterList = () => {
   const history = useHistory()
@@ -23,6 +24,9 @@ const CharacterList = () => {
   const searchParams = useSearchParams()
   const currentPageParam = searchParams.get('page') || '1'
   const currentPage = Number(currentPageParam)
+
+  // UX improvement for mobile devices
+  useEffect(() => scrollOnTop(), [currentPage])
 
   const updateCurrentPage = useCallback((pageIndex: number) => history.push(`/?page=${pageIndex}`), [history])
 
@@ -36,12 +40,10 @@ const CharacterList = () => {
   const characters = data?.results
   const maxPageCount = useMemo(() => (data ? Math.ceil(data.count / 10) : 0), [data])
 
-  useEffect(() => scrollOnTop(), [currentPage])
+  const { data: localCharacterData } = useCharacterStore()
 
   if (!isValidId(currentPageParam)) return <PageError />
-
   if (isError) return <PageError error={error} />
-
   if (isLoading) return <LoadingSpinner />
 
   return (
@@ -58,8 +60,17 @@ const CharacterList = () => {
               if (characterId >= 17) characterId++
 
               const characterImg = getImageIfExist(characterId)
+
+              const finalCharacterName =
+                (localCharacterData && localCharacterData[characterId] && localCharacterData[characterId].name) ||
+                item.name
               return (
-                <CharacterListItem key={item.name} imageSrc={characterImg} name={item.name} characterId={characterId} />
+                <CharacterListItem
+                  key={item.name}
+                  imageSrc={characterImg}
+                  name={finalCharacterName}
+                  characterId={characterId}
+                />
               )
             })}
         </SimpleGrid>

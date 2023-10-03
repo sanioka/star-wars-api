@@ -18,7 +18,9 @@ const CharacterListItem: FC<Props> = ({ imageSrc, name, characterId }) => {
           borderRadius="md"
         />
         <LinkOverlay as={ReactRouterLink} to={`/character/${characterId}`}>
-          <Text mt="1">{name}</Text>
+          <Text mt="1" align="center">
+            {name}
+          </Text>
         </LinkOverlay>
       </LinkBox>
     </Flex>

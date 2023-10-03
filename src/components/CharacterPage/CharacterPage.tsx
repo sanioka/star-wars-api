@@ -16,6 +16,7 @@ import EditableField from './EditableField'
 import { IPeople, IPeopleBase } from '../../api/IStarWars'
 import { fieldList } from './field-list'
 import { useCharacterStore } from '../../store/store'
+import { useShallow } from 'zustand/shallow'
 
 const CharacterPage = () => {
   const { id } = useParams() as { id: string }
@@ -38,11 +39,15 @@ const CharacterPage = () => {
 
   const [isEditMode, setEditMode] = useState(false)
 
-  const { localData, changeLocalData, deleteLocalData } = useCharacterStore((state) => ({
-    localData: state.data[id],
-    changeLocalData: state.changeData,
-    deleteLocalData: state.deleteData,
-  }))
+  const { localData, changeLocalData, deleteLocalData } = useCharacterStore(
+    useShallow((state) => ({
+      localData: state.data[id],
+      changeLocalData: state.changeData,
+      deleteLocalData: state.deleteData,
+    })),
+  )
+
+  // const { nuts, honey } = useBearStore(useShallow((state) => ({ nuts: state.nuts, honey: state.honey })))
 
   // Local localData has more priority than API data
   const characterData = localData ? localData : serverData
@@ -62,7 +67,6 @@ const CharacterPage = () => {
   const doubleClickHandler = useCallback(() => !isEditMode && enableEditMode(), [isEditMode, enableEditMode])
 
   if (!isValidId(id)) return <PageError />
-
   if (isError) return <PageError error={error} />
   if (isLoading) return <LoadingSpinner />
 
