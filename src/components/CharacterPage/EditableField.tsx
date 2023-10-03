@@ -9,7 +9,13 @@ const EditableField: FC<Props> = ({ isEditMode, fieldItem, value, onChange, onDo
   const onChangeHandler = useCallback((nextValue: string) => onChange(fieldId, nextValue), [fieldId, onChange])
 
   const content = isEditMode ? (
-    <Editable defaultValue={value || ''} startWithEditView={false} flex={1} onChange={onChangeHandler}>
+    <Editable
+      defaultValue={value || ''}
+      startWithEditView={false}
+      flex={1}
+      onChange={onChangeHandler}
+      selectAllOnFocus={false}
+    >
       <EditablePreview w={'100%'} bgColor={hoverBgColor} px={2} minH="1em" />
       <EditableInput w={'100%'} px={2} minH="1em" />
     </Editable>
