@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Editable, EditableInput, EditablePreview, HStack, Text, useColorModeValue } from '@chakra-ui/react'
+import { IPeopleBase } from '../../api/IStarWars'
 
 const EditableField: FC<Props> = ({ isEditMode, fieldItem, fieldData, onChange, onDoubleClick }) => {
   const hoverBgColor = useColorModeValue('gray.100', 'gray.700')
@@ -37,7 +38,7 @@ const EditableField: FC<Props> = ({ isEditMode, fieldItem, fieldData, onChange, 
 
 type Props = {
   isEditMode: boolean
-  fieldData?: any
+  fieldData?: string
   setEditMode?: (state: boolean) => void
   onChange: (fieldId: string, nextValue: string) => void
   onDoubleClick: () => void
@@ -46,7 +47,7 @@ type Props = {
 
 export type FormField = {
   header: string
-  id: string
+  id: keyof IPeopleBase
   postfix?: string
 }
 

@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import { API_PAGINATION_COUNT } from '../../config'
 import { fetchCharacterList } from '../../api/star-wars-api'
-import { IPeople } from '../../api/IStarWars'
+import { ApiResponse, IPeople } from '../../api/IStarWars'
 import useSearchParams from '../../hooks/use-search-params'
 import { getImageIfExist } from '../../helpers/character-mock-images'
 
@@ -26,7 +26,7 @@ const CharacterList = () => {
 
   const updateCurrentPage = useCallback((pageIndex: number) => history.push(`/?page=${pageIndex}`), [history])
 
-  const { isLoading, data, isError, error } = useQuery(
+  const { isLoading, data, isError, error } = useQuery<ApiResponse, Error>(
     [`characterList-page${currentPage}`],
     () => (isValidId(currentPageParam) ? fetchCharacterList(currentPage) : Promise.reject('Invalid page id from url')),
     {
@@ -40,10 +40,7 @@ const CharacterList = () => {
 
   if (!isValidId(currentPageParam)) return <PageError />
 
-  if (isError) {
-    // @ts-ignore
-    return <PageError message={error?.message ? error.message : JSON.stringify(error)} />
-  }
+  if (isError) return <PageError message={error?.message ? error.message : JSON.stringify(error)} />
 
   if (isLoading) return <LoadingSpinner />
 

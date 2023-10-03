@@ -13,7 +13,7 @@ import { scrollOnTop } from '../../helpers/scroll-on-top'
 import PageError from '../App/PageError'
 import { isValidId } from '../../helpers/validators'
 import EditableField from './EditableField'
-import { IPeople } from '../../api/IStarWars'
+import { IPeople, IPeopleBase } from '../../api/IStarWars'
 import { fieldList } from './field-list'
 
 const CharacterPage = () => {
@@ -27,7 +27,7 @@ const CharacterPage = () => {
     data: characterServerData,
     isError,
     error,
-  } = useQuery(
+  } = useQuery<IPeople, Error>(
     [`characterPage-${id}`],
     () => (isValidId(id) ? fetchCharacter(id) : Promise.reject('Invalid id from url')),
     {
@@ -37,23 +37,19 @@ const CharacterPage = () => {
 
   const [isEditMode, setEditMode] = useState(false)
   const [storage, setStorage] = useState<IPeople | undefined>(undefined)
-  const characterData: any = useMemo(() => (storage ? storage : characterServerData), [storage, characterServerData])
+  const characterData = useMemo(() => (storage ? storage : characterServerData), [storage, characterServerData])
 
   const onChangeHandler = (fieldId: string, nextValue: string) => {
     setStorage((value) => {
       const newValue = value ? Object.assign({}, value) : Object.assign({}, characterServerData)
-      // @ts-ignore
-      newValue[fieldId] = nextValue ? nextValue : 'n/a' //characterServerData[fieldId]
+      newValue[fieldId as keyof IPeopleBase] = nextValue ? nextValue : 'n/a'
       return newValue
     })
   }
 
   if (!isValidId(id)) return <PageError />
 
-  if (isError) {
-    // @ts-ignore
-    return <PageError message={error?.message ? error.message : JSON.stringify(error)} />
-  }
+  if (isError) return <PageError message={error?.message ? error.message : JSON.stringify(error)} />
   if (isLoading) return <LoadingSpinner />
 
   return (
