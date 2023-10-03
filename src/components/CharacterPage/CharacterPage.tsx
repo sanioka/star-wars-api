@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { Flex, Box, Image, VStack, Text } from '@chakra-ui/react'
@@ -15,6 +15,7 @@ import { isValidId } from '../../helpers/validators'
 import EditableField from './EditableField'
 import { IPeople, IPeopleBase } from '../../api/IStarWars'
 import { fieldList } from './field-list'
+import { useCharacterStore } from '../../store/store'
 
 const CharacterPage = () => {
   const { id } = useParams() as { id: string }
@@ -36,22 +37,29 @@ const CharacterPage = () => {
   )
 
   const [isEditMode, setEditMode] = useState(false)
-  const [storage, setStorage] = useState<IPeople | undefined>(undefined)
-  const resetStorage = useCallback(() => setStorage(undefined), [])
 
-  const characterData = useMemo(() => (storage ? storage : serverData), [storage, serverData])
+  const { localData, changeLocalData, deleteLocalData } = useCharacterStore((state) => ({
+    localData: state.data[id],
+    changeLocalData: state.changeData,
+    deleteLocalData: state.deleteData,
+  }))
 
-  const onChangeHandler = (fieldId: string, nextValue: string) => {
-    setStorage((prev) => {
-      const result = Object.assign({}, prev ? prev : serverData)
+  // Local localData has more priority than API data
+  const characterData = localData ? localData : serverData
+
+  const resetStorage = useCallback(() => deleteLocalData(id), [deleteLocalData, id])
+  const onChangeHandler = useCallback(
+    (fieldId: string, nextValue: string) => {
+      const result = Object.assign({}, characterData)
       result[fieldId as keyof IPeopleBase] = nextValue ? nextValue : 'n/a'
-      return result
-    })
-  }
+      changeLocalData(id, result)
+    },
+    [changeLocalData, characterData, id],
+  )
 
   const enableEditMode = useCallback(() => setEditMode(true), [])
   const disableEditMode = useCallback(() => setEditMode(false), [])
-  const doubleClickHandler = useCallback(() => !isEditMode && setEditMode(true), [isEditMode])
+  const doubleClickHandler = useCallback(() => !isEditMode && enableEditMode(), [isEditMode, enableEditMode])
 
   if (!isValidId(id)) return <PageError />
 
@@ -89,7 +97,7 @@ const CharacterPage = () => {
 
           <Flex alignItems="baseline" justifyContent="space-between">
             <Box>
-              {storage && (
+              {localData && (
                 <Text color="gray.500" mt={2} mb={[isEditMode ? 0 : 4, 0]}>
                   &#9888; Data edited locally only on your computer
                 </Text>
@@ -99,7 +107,7 @@ const CharacterPage = () => {
             {isEditMode && (
               <Flex minW="4em" color="gray.500" justifyContent="right" alignItems="center" mt={1}>
                 <Text cursor="pointer" onClick={disableEditMode}>
-                  {storage ? 'Save' : 'Cancel'}
+                  {localData ? 'Save' : 'Cancel'}
                 </Text>
               </Flex>
             )}
@@ -112,7 +120,7 @@ const CharacterPage = () => {
               Edit
             </Text>
 
-            {storage && (
+            {localData && (
               <Text cursor="pointer" onClick={resetStorage} mt={2}>
                 Reset
               </Text>
