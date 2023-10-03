@@ -40,7 +40,7 @@ const CharacterList = () => {
 
   if (!isValidId(currentPageParam)) return <PageError />
 
-  if (isError) return <PageError message={error?.message ? error.message : JSON.stringify(error)} />
+  if (isError) return <PageError error={error} />
 
   if (isLoading) return <LoadingSpinner />
 
