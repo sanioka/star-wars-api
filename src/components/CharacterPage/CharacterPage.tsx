@@ -5,7 +5,7 @@ import { Flex, Box, Image, VStack, Text } from '@chakra-ui/react'
 
 import { IS_DEBUG } from '../../config'
 import { fetchCharacter } from '../../api/star-wars-api'
-import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
+import Breadcrumbs from '../Breadcrumbs'
 import LoadingSpinner from '../App/LoadingSpinner'
 
 import { getImageIfExist } from '../../helpers/character-mock-images'

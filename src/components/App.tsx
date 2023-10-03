@@ -2,11 +2,11 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Container, Flex } from '@chakra-ui/react'
 
-import Header from './App/Header/Header'
+import Header from './App/Header'
 import Footer from './App/Footer'
 import PageError from './App/PageError'
-import CharacterList from './CharacterList/CharacterList'
-import CharacterPage from './CharacterPage/CharacterPage'
+import CharacterList from './CharacterList'
+import CharacterPage from './CharacterPage'
 
 function App() {
   return (
