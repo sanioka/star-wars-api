@@ -1,4 +1,4 @@
-import { FormField } from './EditableField'
+import { FormField } from './FormField'
 
 export const fieldList: FormField[] = [
   {

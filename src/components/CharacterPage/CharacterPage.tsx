@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { Flex, Box, Image, VStack, Text } from '@chakra-ui/react'
@@ -24,7 +24,7 @@ const CharacterPage = () => {
 
   const {
     isLoading,
-    data: characterServerData,
+    data: serverData,
     isError,
     error,
   } = useQuery<IPeople, Error>(
@@ -37,15 +37,21 @@ const CharacterPage = () => {
 
   const [isEditMode, setEditMode] = useState(false)
   const [storage, setStorage] = useState<IPeople | undefined>(undefined)
-  const characterData = useMemo(() => (storage ? storage : characterServerData), [storage, characterServerData])
+  const resetStorage = useCallback(() => setStorage(undefined), [])
+
+  const characterData = useMemo(() => (storage ? storage : serverData), [storage, serverData])
 
   const onChangeHandler = (fieldId: string, nextValue: string) => {
-    setStorage((value) => {
-      const newValue = value ? Object.assign({}, value) : Object.assign({}, characterServerData)
-      newValue[fieldId as keyof IPeopleBase] = nextValue ? nextValue : 'n/a'
-      return newValue
+    setStorage((prev) => {
+      const result = Object.assign({}, prev ? prev : serverData)
+      result[fieldId as keyof IPeopleBase] = nextValue ? nextValue : 'n/a'
+      return result
     })
   }
+
+  const enableEditMode = useCallback(() => setEditMode(true), [])
+  const disableEditMode = useCallback(() => setEditMode(false), [])
+  const doubleClickHandler = useCallback(() => !isEditMode && setEditMode(true), [isEditMode])
 
   if (!isValidId(id)) return <PageError />
 
@@ -74,9 +80,9 @@ const CharacterPage = () => {
             <EditableField
               key={fieldItem.id}
               fieldItem={fieldItem}
-              fieldData={characterData ? characterData[fieldItem.id] : undefined}
+              value={characterData ? characterData[fieldItem.id] : undefined}
               isEditMode={isEditMode}
-              onDoubleClick={() => !isEditMode && setEditMode(true)}
+              onDoubleClick={doubleClickHandler}
               onChange={onChangeHandler}
             />
           ))}
@@ -92,7 +98,7 @@ const CharacterPage = () => {
 
             {isEditMode && (
               <Flex minW="4em" color="gray.500" justifyContent="right" alignItems="center" mt={1}>
-                <Text cursor="pointer" onClick={() => setEditMode(false)}>
+                <Text cursor="pointer" onClick={disableEditMode}>
                   {storage ? 'Save' : 'Cancel'}
                 </Text>
               </Flex>
@@ -102,12 +108,12 @@ const CharacterPage = () => {
 
         {!isEditMode && (
           <Flex minW="4em" flexDirection="column" color="gray.500" alignItems="flex-end">
-            <Text cursor="pointer" onClick={() => setEditMode(true)}>
+            <Text cursor="pointer" onClick={enableEditMode}>
               Edit
             </Text>
 
             {storage && (
-              <Text cursor="pointer" onClick={() => setStorage(undefined)} mt={2}>
+              <Text cursor="pointer" onClick={resetStorage} mt={2}>
                 Reset
               </Text>
             )}
