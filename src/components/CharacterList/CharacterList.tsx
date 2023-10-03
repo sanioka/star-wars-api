@@ -57,7 +57,7 @@ const CharacterList = () => {
               // Workaround to fix backend bug with id and pagination diff 🤦, because API /people/17 is shifted to /people/18
               if (characterId >= 17) characterId++
 
-              const characterImg = getImageIfExist(item.name)
+              const characterImg = getImageIfExist(characterId)
               return (
                 <CharacterListItem key={item.name} imageSrc={characterImg} name={item.name} characterId={characterId} />
               )

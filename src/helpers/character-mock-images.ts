@@ -106,11 +106,11 @@ export const IMAGE_DB_MOCK_DATA: ImageMockData[] = [
 // key-value O(1) storage
 const IMAGE_DB: ImageData = {}
 IMAGE_DB_MOCK_DATA.forEach((item: ImageMockData) => {
-  IMAGE_DB[item.name] = item.photo
+  IMAGE_DB[item.id] = item.photo
 })
 
-export const getImageIfExist = (name = '') => {
-  return name && IMAGE_DB[name] ? IMAGE_DB[name] : fallbackImageSrc
+export const getImageIfExist = (id: number | string) => {
+  return id && IMAGE_DB[id] ? IMAGE_DB[id] : fallbackImageSrc
 }
 
 type ImageMockData = {

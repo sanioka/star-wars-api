@@ -69,7 +69,7 @@ const CharacterPage = () => {
             maxW="150px"
             maxH="200px"
             objectFit="cover"
-            src={getImageIfExist(characterData?.name)}
+            src={getImageIfExist(id)}
             alt={characterData?.name}
             borderRadius="md"
           />
