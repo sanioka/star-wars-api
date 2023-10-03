@@ -125,7 +125,7 @@ const CharacterPage = () => {
             </Text>
 
             {localData && (
-              <Text cursor="pointer" onClick={resetStorage} mt={2}>
+              <Text cursor="pointer" onClick={resetStorage} mt={[6, 2]}>
                 Reset
               </Text>
             )}
