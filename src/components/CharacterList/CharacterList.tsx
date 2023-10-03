@@ -5,15 +5,14 @@ import { useQuery } from '@tanstack/react-query'
 
 import { API_PAGINATION_COUNT } from '../../config'
 import { fetchCharacterList } from '../../api/star-wars-api'
-import { IPeople } from '../../api/IStarWars'
+import { ApiResponse, IPeople } from '../../api/IStarWars'
 import useSearchParams from '../../hooks/use-search-params'
 import { getImageIfExist } from '../../helpers/character-mock-images'
-import fallbackImageSrc from './img/fallback-img1.png'
 
 import CharacterListPagination from './CharacterListPagination'
 import CharacterListItem from './CharacterListItem'
 import LoadingSpinner from '../App/LoadingSpinner'
-import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
+import Breadcrumbs from '../Breadcrumbs'
 import { scrollOnTop } from '../../helpers/scroll-on-top'
 import { isValidId } from '../../helpers/validators'
 import PageError from '../App/PageError'
@@ -27,7 +26,7 @@ const CharacterList = () => {
 
   const updateCurrentPage = useCallback((pageIndex: number) => history.push(`/?page=${pageIndex}`), [history])
 
-  const { isLoading, data, isError, error } = useQuery(
+  const { isLoading, data, isError, error } = useQuery<ApiResponse, Error>(
     [`characterList-page${currentPage}`],
     () => (isValidId(currentPageParam) ? fetchCharacterList(currentPage) : Promise.reject('Invalid page id from url')),
     {
@@ -41,10 +40,7 @@ const CharacterList = () => {
 
   if (!isValidId(currentPageParam)) return <PageError />
 
-  if (isError) {
-    // @ts-ignore
-    return <PageError message={error?.message ? error.message : JSON.stringify(error)} />
-  }
+  if (isError) return <PageError error={error} />
 
   if (isLoading) return <LoadingSpinner />
 
@@ -61,7 +57,7 @@ const CharacterList = () => {
               // Workaround to fix backend bug with id and pagination diff 🤦, because API /people/17 is shifted to /people/18
               if (characterId >= 17) characterId++
 
-              const characterImg = getImageIfExist(item.name) || fallbackImageSrc
+              const characterImg = getImageIfExist(characterId)
               return (
                 <CharacterListItem key={item.name} imageSrc={characterImg} name={item.name} characterId={characterId} />
               )

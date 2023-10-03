@@ -17,22 +17,25 @@ export interface IFilm {
   vehicles: string[] | IVehicle[]
 }
 
-export interface IPeople {
+export interface IPeopleBase {
   birth_year: string
   eye_color: string
-  films: string[] | IFilm[]
   gender: string
   hair_color: string
   height: string
-  homeworld: string | IStarWars
   mass: string
   name: string
   skin_color: string
+  url: string
+}
+
+export interface IPeople extends IPeopleBase {
+  films: string[] | IFilm[]
+  homeworld: string | IStarWars
   created: Date
   edited: Date
   species: string[] | ISpecie[]
   starships: string[] | IStarship[]
-  url: string
   vehicles: string[] | IVehicle[]
 }
 
