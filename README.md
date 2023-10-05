@@ -63,4 +63,6 @@ As an additional task:
 * Zustand
 * Prettier / ESLint
 
-#### (c) 2013 Alex @sanioka Ivanov
+<br>
+--<br>
+&copy; 2023 Alex @sanioka Ivanov
