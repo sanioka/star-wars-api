@@ -1,54 +1,66 @@
-# Getting Started with Create React App
+## Star Wars Characters / Test task for React engineer 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Description
 
-## Available Scripts
+<details><summary>🇺🇸 English</summary>
+Using a third-party API as a data source (example: [Star Wars API](https://swapi.dev/)), implement a React SPA application consisting of two pages.
 
-In the project directory, you can run:
+On the main page, display a list or cards of characters, add the ability to paginate to the list.
+Implement a page with detailed information on the selected character.
 
-### `npm start`
+Pros:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* Using TypeScript
+* Neat layout
+* Using a UI framework (Material, Ant, Bootstrap, etc.)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+As an additional task:
 
-### `npm test`
+* Use Redux/MobX/Zustand storage to work with data
+* Edit character information locally, without sending to the server
+* Write tests
+</details>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<details><summary>🇷🇺 Russian</summary>
 
-### `npm run build`
+Используя стороннее API в качестве источника данных (пример: [Star Wars API](https://swapi.dev/) ), реализовать SPA
+приложение React, состоящее из двух страниц.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+На главной странице отобразить список или карточки персонажей, к списку добавить возможность пагинации.
+Реализовать страницу с подробной информацией по выбранному персонажу.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Плюсы:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Использование TypeScript
+* Аккуратная верстка
+* Использование UI фреймворка (Material, Ant, Bootstrap и т.п.)
 
-### `npm run eject`
+В качестве дополнительного задания:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* Для работы с данными использовать хранилище Redux/MobX/Zustand
+* Редактировать информацию о персонаже локально, без отправки на сервер
+* Написать тесты
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+</details>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Online demo
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+///
 
-## Learn More
+### How to run
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`npm install`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`npm start`
 
-## How to fix lefthook & nvm issue 
+### Technical stack
 
-if you have MacOS commit error 'git commit node: No such file or directory'
+* Create React App
+* Typescript
+* React / React Router
+* Chakra-UI
+* React Query
+* Zustand
+* Prettier / ESLint
 
-https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md#rc
-
-
+#### (c) 2013 Alex @sanioka Ivanov

@@ -24,6 +24,9 @@ const persister = createSyncStoragePersister({
   storage: window.localStorage,
 })
 
+/**
+ * Entry point
+ */
 function AppRoot() {
   const [isDevtools, setIsDevtools] = useState(IS_DEBUG)
   useEffect(() => {
