@@ -45,25 +45,25 @@ As an additional task:
 
 ### Screenshots
 
-<table>
-  <tr>
-    <td> 
+<table style="border-collapse: collapse;">
+  <tr style="border: none;">
+    <td style="border: none;"> 
       <img src="https://raw.githubusercontent.com/sanioka/star-wars-api/main/screenshots/desktop/desktop-screen1.jpg" width="250" alt="App demo screenshot">
     </td>
-    <td>
+    <td style="border: none;">
       <img src="https://raw.githubusercontent.com/sanioka/star-wars-api/main/screenshots/desktop/desktop-screen2.jpg" width="250" alt="App demo screenshot">
     </td>
   </tr>
 </table>
-<table>
-  <tr>
-    <td> 
+<table style="border-collapse: collapse;">
+  <tr style="border: none;">
+    <td style="border: none;"> 
       <img src="https://raw.githubusercontent.com/sanioka/star-wars-api/main/screenshots/mobile/mobile-screen1.jpg" width="120" alt="App demo screenshot">
     </td>
-    <td>
+    <td style="border: none;">
       <img src="https://raw.githubusercontent.com/sanioka/star-wars-api/main/screenshots/mobile/mobile-screen2.jpg" width="120" alt="App demo screenshot">
     </td>
-    <td>
+    <td style="border: none;">
       <img src="https://raw.githubusercontent.com/sanioka/star-wars-api/main/screenshots/mobile/mobile-screen3.jpg" width="120" alt="App demo screenshot">
     </td>
   </tr>
