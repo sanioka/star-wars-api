@@ -1,6 +1,6 @@
 ## Star Wars Characters / Test task for React engineer 
 
-### Description
+### Test assignment description
 
 <details><summary>🇺🇸 English</summary>
 Using a third-party API as a data source (example: [Star Wars API](https://swapi.dev/)), implement a React SPA application consisting of two pages.
@@ -42,6 +42,15 @@ As an additional task:
 * Написать тесты
 
 </details>
+
+### Screenshots
+
+<img src="https://raw.githubusercontent.com/sanioka/star-wars-api/main/screenshots/desktop/desktop-screen1.jpg" width="250" alt="App demo screenshot">
+<img src="https://raw.githubusercontent.com/sanioka/star-wars-api/main/screenshots/desktop/desktop-screen2.jpg" width="250" alt="App demo screenshot">
+<br><br>
+<img src="https://raw.githubusercontent.com/sanioka/star-wars-api/main/screenshots/mobile/mobile-screen1.jpg" width="120" alt="App demo screenshot">
+<img src="https://raw.githubusercontent.com/sanioka/star-wars-api/main/screenshots/mobile/mobile-screen2.jpg" width="120" alt="App demo screenshot">
+<img src="https://raw.githubusercontent.com/sanioka/star-wars-api/main/screenshots/mobile/mobile-screen3.jpg" width="120" alt="App demo screenshot">
 
 ### Online demo
 
