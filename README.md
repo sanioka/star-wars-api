@@ -45,16 +45,16 @@ As an additional task:
 
 ### Screenshots
 
-<table style="border-collapse: collapse;">
-  <tr style="border: none;">
-    <td style="border: none;"> 
-      <img src="https://raw.githubusercontent.com/sanioka/star-wars-api/main/screenshots/desktop/desktop-screen1.jpg" width="250" alt="App demo screenshot">
-    </td>
-    <td style="border: none;">
-      <img src="https://raw.githubusercontent.com/sanioka/star-wars-api/main/screenshots/desktop/desktop-screen2.jpg" width="250" alt="App demo screenshot">
-    </td>
-  </tr>
-</table>
+| Header 1 | Header 2 |
+| -------- | -------- |
+|       <img src="https://raw.githubusercontent.com/sanioka/star-wars-api/main/screenshots/desktop/desktop-screen1.jpg" width="250" alt="App demo screenshot">   |       <img src="https://raw.githubusercontent.com/sanioka/star-wars-api/main/screenshots/desktop/desktop-screen2.jpg" width="250" alt="App demo screenshot">  |
+
+
+<div>
+    <img src="https://raw.githubusercontent.com/sanioka/star-wars-api/main/screenshots/desktop/desktop-screen1.jpg" width="250" alt="App demo screenshot">
+    <img src="https://raw.githubusercontent.com/sanioka/star-wars-api/main/screenshots/desktop/desktop-screen2.jpg" width="250" alt="App demo screenshot">
+</div>
+
 <table style="border-collapse: collapse;">
   <tr style="border: none;">
     <td style="border: none;"> 
