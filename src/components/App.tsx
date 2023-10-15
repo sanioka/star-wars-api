@@ -8,9 +8,10 @@ import PageError from './App/PageError'
 import CharacterList from './CharacterList'
 import CharacterPage from './CharacterPage'
 
+// TODO: remove basename hardcode
 function App() {
   return (
-    <Router>
+    <Router basename="/star-wars-api-demo">
       <Container maxW="container.lg" flexDirection="column" minH="100vh" display={'flex'}>
         <Header />
 

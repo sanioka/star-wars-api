@@ -1,7 +1,8 @@
 {
   "name": "star-wars-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
+  "homepage": "https://sanioka.github.io/star-wars-api-demo",
   "dependencies": {
     "@chakra-ui/icons": "~2.1.1",
     "@chakra-ui/react": "~2.8.1",
@@ -20,6 +21,7 @@
     "@types/react-dom": "~18.2.7",
     "axios": "~1.5.0",
     "framer-motion": "~10.16.4",
+    "gh-pages": "~6.0.0",
     "lodash-es": "~4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -31,7 +33,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "BUILD_PATH='./build/star-wars-api-demo' react-scripts build",
+    "deploy": "gh-pages --branch stage --dist './build/star-wars-api-demo' -m 'Deployed star-wars-api-demo' --dest './star-wars-api-demo' --repo 'https://github.com/sanioka/sanioka.github.io.git'",
+    "deploy-full": "npm run build && npm run deploy",
+    "serve": "serve -s build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext js,ts,tsx ."
