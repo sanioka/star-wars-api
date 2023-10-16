@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "star-wars-api-demo/**", "destination": "/star-wars-api-demo/index.html" }
+  ],
+  "redirects": [
+    { "source": "/", "destination": "/star-wars-api-demo/index.html" }
+  ]
+}

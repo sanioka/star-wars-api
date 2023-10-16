@@ -36,7 +36,7 @@
     "build": "BUILD_PATH='./build/star-wars-api-demo' react-scripts build",
     "deploy": "gh-pages --branch stage --dist './build/star-wars-api-demo' -m 'Deployed star-wars-api-demo' --dest './star-wars-api-demo' --repo 'https://github.com/sanioka/sanioka.github.io.git'",
     "deploy-full": "npm run build && npm run deploy",
-    "serve": "serve -s build",
+    "serve": "cp ./serve.json ./build/serve.json && serve build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext js,ts,tsx ."
