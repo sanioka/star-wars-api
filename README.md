@@ -11,11 +11,11 @@
   <img src="https://raw.githubusercontent.com/sanioka/star-wars-api/main/screenshots/mobile/mobile-screen3.jpg" width="120" alt="App demo screenshot">
 </div>
 
+<br> 
+
 https://sanioka.github.io/star-wars-api-demo/ (online demo)
 
-### Test assignment description
-
-<details open><summary>🇺🇸 English</summary>
+<details open><summary>Test assignment description</summary>
 Using a third-party API as a data source (example: [Star Wars API](https://swapi.dev/)), implement a React SPA application consisting of two pages.
 
 On the main page, display a list or cards of characters, add the ability to paginate to the list.
